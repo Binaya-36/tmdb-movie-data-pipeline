@@ -1,32 +1,30 @@
 import os
+import json
 import requests
-import pandas as pd
 from dotenv import load_dotenv
 
 load_dotenv()
-
 api_key = os.getenv("TMDB_API_KEY")
 
-url = "https://api.themoviedb.org/3/movie/popular"
+# Step 1: get the list of popular movies
+popular = []
+for page in range(1, 16):
+    url = "https://api.themoviedb.org/3/movie/popular"
+    response = requests.get(url, params={"api_key": api_key, "page": page})
+    popular.extend(response.json()["results"])
 
-all_movies = []
+print("Popular movies:", len(popular))
 
-for page in range(1, 11):
+# Step 2: get full details for each movie
+details = []
+for movie in popular:
+    url = f"https://api.themoviedb.org/3/movie/{movie['id']}"
+    response = requests.get(url, params={"api_key": api_key})
+    details.append(response.json())
 
-    params = {
-        "api_key": api_key,
-        "page": page
-    }
+print("Details collected:", len(details))
 
-    response = requests.get(url, params=params)
-
-    print("Page:", page, "Status:", response.status_code)
-
-    data = response.json()
-
-    all_movies.extend(data["results"])
-
-df = pd.DataFrame(all_movies)
-
-print("Total movies:", len(df))
-print(df.head())
+# Step 3: save the raw data
+os.makedirs("data", exist_ok=True)
+with open("data/details_raw.json", "w") as f:
+    json.dump(details, f)
