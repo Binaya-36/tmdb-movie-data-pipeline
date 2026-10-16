@@ -1,0 +1,16 @@
+genre_name,movies_with_revenue,average_revenue
+Adventure,108,781952478.0
+Science Fiction,72,707664308.0
+Action,91,671786694.0
+Fantasy,53,648909998.0
+Family,49,594132570.0
+Animation,47,584216176.0
+Comedy,63,507182671.0
+Romance,12,421904643.0
+Drama,56,370340526.0
+History,5,346673442.0
+Crime,32,308146938.0
+Thriller,61,259955653.0
+Mystery,24,257834105.0
+War,5,219109694.0
+Horror,26,176301251.0

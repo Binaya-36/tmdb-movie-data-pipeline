@@ -1,0 +1,4 @@
+length_group,total_movies,average_rating
+Medium (90-120 min),145,7.23
+Long (over 120 min),126,7.7
+Short (under 90 min),22,6.32
